@@ -592,7 +592,7 @@ getMaxPid(int *max_pid)
 
 //Defined getProcInfo
 int
-getProcInfo(int pid, struct uproc *up)
+getProcInfo(int pid, struct processInfo *up)
 {
 	sti();
 	acquire(&ptable.lock);

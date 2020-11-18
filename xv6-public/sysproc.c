@@ -99,11 +99,11 @@ int sys_getMaxPid(void) {
 	return getMaxPid(max_pid);
 }
 
-//Get process info as per structure uproc
+//Get process info as per structure processInfo
 int
 sys_getProcInfo(void) {
 	int pid;
-	struct uproc *up;
+	struct processInfo *up;
 	
 	argptr(0,(void *)&pid,sizeof(pid));
 	argptr(1,(void *)&up,sizeof(*up));

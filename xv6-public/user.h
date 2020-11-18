@@ -1,7 +1,7 @@
 struct stat;
 struct rtcdate;
 
-struct uproc;
+struct processInfo;
 
 
 // system calls
@@ -29,7 +29,7 @@ int uptime(void);
 int getprocinfo(void);
 int getNumProc(int*);
 int getMaxPid(int*);
-int getProcInfo(int, struct uproc*);
+int getProcInfo(int, struct processInfo*);
 
 // ulib.c
 int stat(const char*, struct stat*);

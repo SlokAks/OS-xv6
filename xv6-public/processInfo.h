@@ -1,6 +1,6 @@
 // Specical structure for process info
 
-struct uproc {
+struct processInfo {
 	char name[16];
 	int pid;
 	uint sz;

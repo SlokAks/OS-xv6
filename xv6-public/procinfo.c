@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 	
 	if(argc<2){printf(1,"Enter the PID !!! \n");	exit();}
 	
-	struct uproc *up;up=malloc(1000);
+	struct processInfo *up;up=malloc(1000);
 	
 	int pid=atoi(argv[1]);
 	
