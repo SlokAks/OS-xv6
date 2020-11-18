@@ -121,6 +121,8 @@ int             wait(void);
 void            wakeup(void*);
 void            yield(void);
 int 			getprocinfo(void);
+int 			getNumProc(int*);
+int 			getMaxPid(int*);
 
 // swtch.S
 void            swtch(struct context**, struct context*);
