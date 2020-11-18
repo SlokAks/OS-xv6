@@ -577,8 +577,8 @@ getMaxPid(int *max_pid)
             	p->state == RUNNING || 
             	p->state == ZOMBIE)
             	
-            a = (*max_pid); 
-            b = p->pid;
+            int a = (*max_pid); 
+            int b = p->pid;
             
             *max_pid = (a>b)?a:b;
         }
