@@ -111,6 +111,30 @@ sys_getProcInfo(void) {
 	return getProcInfo(pid,up);
 }
 
+//Get priority function
+int
+sys_getPriority(void)
+{
+	int pid;int *priority;
+	
+	argptr(0,(void *)&pid,sizeof(pid));
+	argptr(1,(void *)&priority,sizeof(*priority));
+	
+	return getPriority(pid,priority);
+}
+
+//Set priority function
+int
+sys_setPriority(void)
+{
+	int pid;int priority;
+	
+	argptr(0,(void *)&pid,sizeof(pid));
+	argptr(1,(void *)&priority,sizeof(priority));
+	
+	return setPriority(pid,priority);
+}
+
 // return how many clock tick interrupts have occurred
 // since start.
 int
@@ -123,3 +147,4 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+

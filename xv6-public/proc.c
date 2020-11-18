@@ -606,8 +606,8 @@ getProcInfo(int pid, struct processInfo *up)
 			safestrcpy(up->name,p->name, sizeof(p->name));
 			(up)->pid = p->pid;
 			(up)->sz = p->sz;
-			//(up)->num_swtch = p->num_swtch;
-			//(up)->priority = p->priority;
+			(up)->num_swtch = p->num_swtch;
+			(up)->priority = p->priority;
 			found = 1;
 			break;
 		}
@@ -617,6 +617,55 @@ getProcInfo(int pid, struct processInfo *up)
 	return 0;
 	
 }
+
+//Defined getPriority
+int
+getPriority(int pid,int *priority)
+{
+	sti();
+	acquire(&ptable.lock);
+	struct proc *p;
+	//code here
+	int found=0;
+	for(p=ptable.proc;p<&ptable.proc[NPROC];p++)
+	{
+		if(p->pid == pid)
+		{
+			*priority = p->priority;
+			found=1;
+		}
+	}
+	
+	
+	release(&ptable.lock);
+	if(found==0)return -1;
+	return 0;
+}
+
+//Defined setPriority
+int
+setPriority(int pid,int priority)
+{
+	sti();
+	acquire(&ptable.lock);
+	struct proc *p;
+	//code here
+	int found=0;
+	for(p=ptable.proc;p<&ptable.proc[NPROC];p++)
+	{
+		if(p->pid == pid)
+		{
+			p->priority = priority;
+			found=1;
+		}
+	}
+	
+	
+	release(&ptable.lock);
+	if(found==0)return -1;
+	return 0;
+}
+
 
 //Defined getprocinfo
 int

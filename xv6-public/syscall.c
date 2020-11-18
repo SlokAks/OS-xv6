@@ -108,6 +108,8 @@ extern int sys_getprocinfo(void); //Changed
 extern int sys_getNumProc(void); //Added 1
 extern int sys_getMaxPid(void);	 //Added 1
 extern int sys_getProcInfo(void); //Added 2
+extern int sys_getPriority(void); //Added 3
+extern int sys_setPriority(void); //Added 3
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -135,6 +137,8 @@ static int (*syscalls[])(void) = {
 [SYS_getNumProc]	sys_getNumProc,		//Added 1
 [SYS_getMaxPid]		sys_getMaxPid,		//Added 1
 [SYS_getProcInfo]	  sys_getProcInfo, 	//Added 2
+[SYS_getPriority]	  sys_getPriority,	//Added 3
+[SYS_setPriority]	  sys_setPriority,	//Added 3
 };
 
 /*static char* syscallnames[] = {

@@ -30,6 +30,8 @@ int getprocinfo(void);
 int getNumProc(int*);
 int getMaxPid(int*);
 int getProcInfo(int, struct processInfo*);
+int getPriority(int,int*);
+int setPriority(int,int);
 
 // ulib.c
 int stat(const char*, struct stat*);
