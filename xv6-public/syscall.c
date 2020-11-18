@@ -105,6 +105,8 @@ extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_getprocinfo(void); //Changed
+extern int sys_getNumProc(void); //Added 1
+extern int sys_getMaxPid(void);	 //Added 1
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -129,6 +131,8 @@ static int (*syscalls[])(void) = {
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
 [SYS_getprocinfo]	sys_getprocinfo,	//Changed
+[SYS_getNumProc]	sys_getNumProc,		//Added 1
+[SYS_getMaxPid]		sys_getMaxPid,		//Added 1
 };
 
 /*static char* syscallnames[] = {
