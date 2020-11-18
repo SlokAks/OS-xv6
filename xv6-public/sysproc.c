@@ -81,6 +81,23 @@ int sys_getprocinfo(void) {
 	return getprocinfo();
 }
 
+//Get number of active processes
+int
+sys_getNumProc(void) {
+	int *num_proc;
+	argptr(0,(void *)&num_proc, sizeof(*num_proc));
+	
+	return getNumProc(num_proc);
+}
+
+//Get max PID among all active processes
+int sys_getMaxPid(void) {
+	int *max_pid;
+	argptr(0,(void *)&max_pid, sizeof(*max_pid));
+	
+	return getMaxPid(max_pid);
+}
+
 // return how many clock tick interrupts have occurred
 // since start.
 int
