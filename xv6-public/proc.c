@@ -6,6 +6,7 @@
 #include "x86.h"
 #include "proc.h"
 #include "spinlock.h"
+#include "processInfo.h"
 
 struct {
   struct spinlock lock;
@@ -587,6 +588,34 @@ getMaxPid(int *max_pid)
         release(&ptable.lock);
         return 0;
 
+}
+
+//Defined getProcInfo
+int
+getProcInfo(int pid, struct uproc *up)
+{
+	sti();
+	acquire(&ptable.lock);
+	struct proc *p;
+	//Start
+	int found=0;
+	for(p=ptable.proc;p<&ptable.proc[NPROC];p++)
+	{
+		if(p->pid == pid)
+		{
+			safestrcpy(up->name,p->name, sizeof(p->name));
+			(up)->pid = p->pid;
+			(up)->sz = p->sz;
+			//(up)->num_swtch = p->num_swtch;
+			//(up)->priority = p->priority;
+			found = 1;
+			break;
+		}
+	}	
+	release(&ptable.lock);
+	if(found==0) return -1;		//Error -1
+	return 0;
+	
 }
 
 //Defined getprocinfo

@@ -6,6 +6,7 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
+#include "processInfo.h"
 
 int
 sys_fork(void)
@@ -96,6 +97,18 @@ int sys_getMaxPid(void) {
 	argptr(0,(void *)&max_pid, sizeof(*max_pid));
 	
 	return getMaxPid(max_pid);
+}
+
+//Get process info as per structure uproc
+int
+sys_getProcInfo(void) {
+	int pid;
+	struct uproc *up;
+	
+	argptr(0,(void *)&pid,sizeof(pid));
+	argptr(1,(void *)&up,sizeof(*up));
+	
+	return getProcInfo(pid,up);
 }
 
 // return how many clock tick interrupts have occurred

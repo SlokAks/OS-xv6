@@ -107,6 +107,7 @@ extern int sys_uptime(void);
 extern int sys_getprocinfo(void); //Changed
 extern int sys_getNumProc(void); //Added 1
 extern int sys_getMaxPid(void);	 //Added 1
+extern int sys_getProcInfo(void); //Added 2
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -133,6 +134,7 @@ static int (*syscalls[])(void) = {
 [SYS_getprocinfo]	sys_getprocinfo,	//Changed
 [SYS_getNumProc]	sys_getNumProc,		//Added 1
 [SYS_getMaxPid]		sys_getMaxPid,		//Added 1
+[SYS_getProcInfo]	  sys_getProcInfo, 	//Added 2
 };
 
 /*static char* syscallnames[] = {
