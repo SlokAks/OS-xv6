@@ -533,6 +533,67 @@ procdump(void)
   }
 }
 
+// Defined getNumProc
+int
+getNumProc(int *num_proc)
+{
+        sti();
+        acquire(&ptable.lock);
+        struct proc *p;
+        //Start
+       
+        for(p=ptable.proc; p<&ptable.proc[NPROC]; p++)
+        {
+            if(p->state == EMBRYO || 
+            	p->state == SLEEPING || 
+            	p->state == RUNNABLE || 
+            	p->state == RUNNING || 
+            	p->state == ZOMBIE)
+            	
+            (*num_proc)++;
+        }
+
+        release(&ptable.lock);
+        return 0;
+
+}
+
+int max(int a,int b)
+{
+	if(a>b)return a;
+	else return b;
+}
+
+//Defined getMaxPid
+int
+getMaxPid(int *max_pid)
+{
+        sti();
+        acquire(&ptable.lock);
+        struct proc *p;
+        //Start
+		  
+		  (*max_pid) = -1; //initially let -1
+
+        for(p=ptable.proc; p<&ptable.proc[NPROC]; p++)
+        {
+            if(p->state == EMBRYO || 
+            	p->state == SLEEPING || 
+            	p->state == RUNNABLE || 
+            	p->state == RUNNING || 
+            	p->state == ZOMBIE)
+            	
+            a = (*max_pid); 
+            b = p->pid;
+            
+            *max_pid = (a>b)?a:b;
+        }
+
+        release(&ptable.lock);
+        return 0;
+
+}
+
 //Defined getprocinfo
 int
 getprocinfo(void)
