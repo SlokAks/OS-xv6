@@ -24,6 +24,8 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 int getprocinfo(void);
+int getNumProc(int*);
+int getMaxPid(int*);
 
 // ulib.c
 int stat(const char*, struct stat*);
