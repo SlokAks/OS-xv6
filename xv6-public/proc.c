@@ -575,12 +575,13 @@ getMaxPid(int *max_pid)
             	p->state == SLEEPING || 
             	p->state == RUNNABLE || 
             	p->state == RUNNING || 
-            	p->state == ZOMBIE)
+            	p->state == ZOMBIE) {
             	
-            int a = (*max_pid); 
-            int b = p->pid;
+            	int a = (*max_pid); 
+            	int b = p->pid;
             
-            *max_pid = (a>b)?a:b;
+            	*max_pid = (a>b)?a:b;
+            }
         }
 
         release(&ptable.lock);
