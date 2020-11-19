@@ -89,6 +89,7 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
+  p->priority = 10; //default priority is set to 10
 
   release(&ptable.lock);
 
@@ -343,10 +344,13 @@ scheduler(void)
       c->proc = p;
       switchuvm(p);
       p->state = RUNNING;
-
+      
       swtch(&(c->scheduler), p->context);
       switchkvm();
-
+	  
+	  //context switching here
+      (p->num_swtch)++;
+		
       // Process is done running for now.
       // It should have changed its p->state before coming back.
       c->proc = 0;
@@ -598,7 +602,7 @@ getProcInfo(int pid, struct processInfo *up)
 	acquire(&ptable.lock);
 	struct proc *p;
 	//Start
-	int found=0;
+	int flag=0;
 	for(p=ptable.proc;p<&ptable.proc[NPROC];p++)
 	{
 		if(p->pid == pid)
@@ -608,12 +612,12 @@ getProcInfo(int pid, struct processInfo *up)
 			(up)->sz = p->sz;
 			(up)->num_swtch = p->num_swtch;
 			(up)->priority = p->priority;
-			found = 1;
+			flag = 1;
 			break;
 		}
 	}	
 	release(&ptable.lock);
-	if(found==0) return -1;		//Error -1
+	if(flag==0) return -1;		//Error -1
 	return 0;
 	
 }
@@ -625,7 +629,7 @@ getPriority(int pid,int *priority)
 	sti();
 	acquire(&ptable.lock);
 	struct proc *p;
-	//code here
+	//Start
 	int found=0;
 	for(p=ptable.proc;p<&ptable.proc[NPROC];p++)
 	{
@@ -649,7 +653,7 @@ setPriority(int pid,int priority)
 	sti();
 	acquire(&ptable.lock);
 	struct proc *p;
-	//code here
+	//Start
 	int found=0;
 	for(p=ptable.proc;p<&ptable.proc[NPROC];p++)
 	{
